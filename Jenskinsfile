@@ -1,0 +1,34 @@
+pipeline{
+    agent any
+    tools{
+        maven 'Maven 3.9.6'
+    }
+    stages{
+        stage('Build Maven 3.9.6'){
+            steps{
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/MarcelEchebue/DevopsExam']])
+            }
+        }
+        stage('Build Run Test'){
+            steps{
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/MarcelEchebue/DevopsExam']])
+               // para  que funcione la linea de abajo en comentario
+              // sh 'mvn test'
+               
+            }
+        }
+        stage('Build Docker Image'){
+            steps{
+                script{
+                    //sh "docker build -t marcelinoechebue/examen_marcelino ."
+                    //sh "docker push marcelinoechebue/examen_marcelino:tag123"
+                    docker.build('examdevops-marcelino')
+                    // sh 'docker push'
+                    }
+                   
+                }
+            }
+        }
+        
+        
+    }
