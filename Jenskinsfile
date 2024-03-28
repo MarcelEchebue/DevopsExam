@@ -12,8 +12,8 @@ pipeline{
         stage('Build Run Test'){
             steps{
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/MarcelEchebue/DevopsExam']])
-               // para  que funcione la linea de abajo en comentario
-              // sh 'mvn test'
+               //para  que funcione la linea de abajo en comentario
+              //sh 'mvn test'
                
             }
         }
@@ -22,8 +22,9 @@ pipeline{
                 script{
                     //sh "docker build -t marcelinoechebue/examdevops_marcelino ."
                     //sh "docker push marcelinoechebue/examdevops_marcelino:tag123"
-                   docker.build('examdevops-marcelino')
-                   // sh 'docker push'
+                    docker.build('examdevops-marcelino')
+                   // sh 
+                   docker push('examdevops-marcelino')
                    
                 }
             }
