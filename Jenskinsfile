@@ -24,7 +24,7 @@ pipeline{
                     //sh "docker push marcelinoechebue/examdevops_marcelino:tag123"
                     docker.build('examdevops-marcelino')
                    // sh 
-                   docker push('examdevops-marcelino')
+                   docker.push('examdevops-marcelino')
                    
                 }
             }
