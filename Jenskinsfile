@@ -12,8 +12,8 @@ pipeline{
         stage('Build Run Test'){
             steps{
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/MarcelEchebue/DevopsExam']])
-               //para  que funcione la linea de abajo en comentario
-              //sh 'mvn test'
+                 //para  que funcione la linea de abajo en comentario
+                //sh 'mvn test'
                
             }
         }
@@ -22,33 +22,30 @@ pipeline{
                 script{
                     //sh "docker build -t marcelinoechebue/examdevops_marcelino ."
                     //sh "docker push marcelinoechebue/examdevops_marcelino:tag123"
-                    docker.build('examdevops-marcelino')
-                   // sh 
-                   docker.push('examdevops-marcelino')
+                    docker.build('examdevops_marcelino')
+                   // sh
+                   //para que se cree la imagen es lo de abajo
+                  // docker.push('examdevops_marcelino')
                    
                 }
             }
         }
-         stage('GetCode'){
-            steps{
-                git 'https://github.com/ravdy/javaloginapp.git'
-            }
-         }        
-       stage('Build'){
-            steps{
-                sh 'mvn clean package'
-            }
-         }
+       // stage('GetCode'){
+           // steps{
+          //      git 'https://github.com/MarcelEchebue/DevopsExam'
+           //}
+         //}        
         stage('SonarQube analysis') {
-        //    def scannerHome = tool 'SonarScanner 4.0';
+          //def scannerHome = tool 'SonarScanner 4.0';
         steps{
-            withSonarQubeEnv('sonarqube-8.9') { 
+            withSonarQubeEnv('SonarQube') { 
                 // If you have configured more than one global server connection, you can specify its name
-                //      sh "${scannerHome}/bin/sonar-scanner"
-                    sh "mvn sonar:sonar"
+                  //sh "${scannerHome}/bin/sonar-scanner"
+                    sh 'mvn sonar:sonar'
                     }
                 }
             }
-        } 
         
     }
+    
+}
